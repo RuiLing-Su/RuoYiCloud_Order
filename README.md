@@ -1,131 +1,315 @@
-<p align="center">
-	<img alt="logo" src="https://oscimg.oschina.net/oscnet/up-b99b286755aef70355a7084753f89cdb7c9.png">
-</p>
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">RuoYi v3.6.4</h1>
-<h4 align="center">基于 Vue/Element UI 和 Spring Boot/Spring Cloud & Alibaba 前后端分离的分布式微服务架构</h4>
-<p align="center">
-	<a href="https://gitee.com/y_project/RuoYi-Cloud/stargazers"><img src="https://gitee.com/y_project/RuoYi-Cloud/badge/star.svg?theme=dark"></a>
-	<a href="https://gitee.com/y_project/RuoYi-Cloud"><img src="https://img.shields.io/badge/RuoYi-v3.6.4-brightgreen.svg"></a>
-	<a href="https://gitee.com/y_project/RuoYi-Cloud/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
-</p>
+# **ruoyi-modules-order2**
 
-## 平台简介
+## 1. 项目概述
 
-若依是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
+**ruoyi-modules-order2** 是基于 **RuoYi-Cloud** 框架的自定义微服务模块，旨在实现订单管理功能。该模块采用 Spring Cloud 微服务架构，支持服务注册与发现、负载均衡、API 网关、分布式数据库管理等功能，能够与其他微服务（如用户服务、支付服务等）进行交互。
 
-* 采用前后端分离的模式，微服务版本前端(基于 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue))。
-* 后端采用Spring Boot、Spring Cloud & Alibaba。
-* 注册中心、配置中心选型Nacos，权限认证使用Redis。
-* 流量控制框架选型Sentinel，分布式事务选型Seata。
-* 提供了技术栈（[Vue3](https://v3.cn.vuejs.org) [Element Plus](https://element-plus.org/zh-CN) [Vite](https://cn.vitejs.dev)）版本[RuoYi-Cloud-Vue3](https://github.com/yangzongzhuan/RuoYi-Cloud-Vue3)，保持同步更新。
-* 如需不分离应用，请移步 [RuoYi](https://gitee.com/y_project/RuoYi)，如需分离应用，请移步 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)
-* 阿里云折扣场：[点我进入](http://aly.ruoyi.vip)，腾讯云秒杀场：[点我进入](http://txy.ruoyi.vip)&nbsp;&nbsp;
-* 阿里云优惠券：[点我领取](https://www.aliyun.com/minisite/goods?userCode=brki8iof&share_source=copy_link)，腾讯云优惠券：[点我领取](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console)&nbsp;&nbsp;
+### 1.1 项目特性
 
-#### 友情链接 [若依/RuoYi-Cloud](https://gitee.com/zhangmrit/ruoyi-cloud) Ant Design版本。
+- **微服务架构**：基于 Spring Cloud、Nacos、Gateway 实现服务注册和负载均衡。
+- **订单管理功能**：实现订单的创建、更新、查询、删除等基本操作。
+- **与其他服务集成**：通过 OpenFeign 与其他微服务交互，如用户服务获取用户信息。
+- **高可扩展性**：可轻松扩展并与其他业务微服务集成。
 
-## 系统模块
+---
 
-~~~
-com.ruoyi     
-├── ruoyi-ui              // 前端框架 [80]
-├── ruoyi-gateway         // 网关模块 [8080]
-├── ruoyi-auth            // 认证中心 [9200]
-├── ruoyi-api             // 接口模块
-│       └── ruoyi-api-system                          // 系统接口
-├── ruoyi-common          // 通用模块
-│       └── ruoyi-common-core                         // 核心模块
-│       └── ruoyi-common-datascope                    // 权限范围
-│       └── ruoyi-common-datasource                   // 多数据源
-│       └── ruoyi-common-log                          // 日志记录
-│       └── ruoyi-common-redis                        // 缓存服务
-│       └── ruoyi-common-seata                        // 分布式事务
-│       └── ruoyi-common-security                     // 安全模块
-│       └── ruoyi-common-swagger                      // 系统接口
-├── ruoyi-modules         // 业务模块
-│       └── ruoyi-system                              // 系统模块 [9201]
-│       └── ruoyi-gen                                 // 代码生成 [9202]
-│       └── ruoyi-job                                 // 定时任务 [9203]
-│       └── ruoyi-file                                // 文件服务 [9300]
-├── ruoyi-visual          // 图形化管理模块
-│       └── ruoyi-visual-monitor                      // 监控中心 [9100]
-├──pom.xml                // 公共依赖
-~~~
+## 2. 环境要求
 
-## 架构图
+- **JDK**: 1.8+
+- **Maven**: 3.6+
+- **MySQL**: 5.7+
+- **Redis**: 5.0+
+- **Nacos**: 2.0+
+- **Docker**: 可选（用于部署）
 
-<img src="https://oscimg.oschina.net/oscnet/up-82e9722ecb846786405a904bafcf19f73f3.png"/>
+---
 
-## 内置功能
+## 3. 项目结构
 
-1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
-2.  部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限。
-3.  岗位管理：配置系统用户所属担任职务。
-4.  菜单管理：配置系统菜单，操作权限，按钮权限标识等。
-5.  角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。
-6.  字典管理：对系统中经常使用的一些较为固定的数据进行维护。
-7.  参数管理：对系统动态配置常用参数。
-8.  通知公告：系统通知公告信息发布维护。
-9.  操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询。
-10. 登录日志：系统登录日志记录查询包含登录异常。
-11. 在线用户：当前系统中活跃用户状态监控。
-12. 定时任务：在线（添加、修改、删除)任务调度包含执行结果日志。
-13. 代码生成：前后端代码的生成（java、html、xml、sql）支持CRUD下载 。
-14. 系统接口：根据业务代码自动生成相关的api接口文档。
-15. 服务监控：监视当前系统CPU、内存、磁盘、堆栈等相关信息。
-16. 在线构建器：拖动表单元素生成相应的HTML代码。
-17. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
+```bash
+ruoyi-cloud/
+│
+├── ruoyi-gateway             # API 网关模块
+├── ruoyi-auth                # 认证授权模块
+├── ruoyi-modules             # 微服务模块目录
+│   ├── ruoyi-system          # 系统模块
+│   ├── ruoyi-order2          # 自定义订单管理微服务
+│
+└── ruoyi-common              # 公共模块
+```
 
-## 在线体验
+---
 
-- admin/admin123  
-- 陆陆续续收到一些打赏，为了更好的体验已用于演示服务器升级。谢谢各位小伙伴。
+## 4. 安装与运行
 
-演示地址：http://ruoyi.vip  
-文档地址：http://doc.ruoyi.vip
+### 4.1 数据库配置
 
-## 演示图
+在启动项目前，请确保已经配置好数据库
 
-<table>
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/cd1f90be5f2684f4560c9519c0f2a232ee8.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/1cbcf0e6f257c7d3a063c0e3f2ff989e4b3.jpg"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-8074972883b5ba0622e13246738ebba237a.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-9f88719cdfca9af2e58b352a20e23d43b12.png"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-39bf2584ec3a529b0d5a3b70d15c9b37646.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-4148b24f58660a9dc347761e4cf6162f28f.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-b2d62ceb95d2dd9b3fbe157bb70d26001e9.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-d67451d308b7a79ad6819723396f7c3d77a.png"/></td>
-    </tr>	 
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/5e8c387724954459291aafd5eb52b456f53.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/644e78da53c2e92a95dfda4f76e6d117c4b.jpg"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-8370a0d02977eebf6dbf854c8450293c937.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-49003ed83f60f633e7153609a53a2b644f7.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-d4fe726319ece268d4746602c39cffc0621.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-c195234bbcd30be6927f037a6755e6ab69c.png"/></td>
-    </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-ece3fd37a3d4bb75a3926e905a3c5629055.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-92ffb7f3835855cff100fa0f754a6be0d99.png"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-ff9e3066561574aca73005c5730c6a41f15.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-5e4daac0bb59612c5038448acbcef235e3a.png"/></td>
-    </tr>
-</table>
+### 4.2 Nacos 配置
 
+在 **ruoyi-modules-order2** 模块的 `bootstrap.yml` 文件中，配置 Nacos 注册中心信息：
 
-## 若依微服务交流群
+```yaml
+spring:
+  application:
+    name: ruoyi-order2
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+```
 
-QQ群： [![加入QQ群](https://img.shields.io/badge/已满-42799195-blue.svg)](https://jq.qq.com/?_wv=1027&k=yqInfq0S) [![加入QQ群](https://img.shields.io/badge/已满-170157040-blue.svg)](https://jq.qq.com/?_wv=1027&k=Oy1mb3p8) [![加入QQ群](https://img.shields.io/badge/已满-130643120-blue.svg)](https://jq.qq.com/?_wv=1027&k=rvxkJtXK) [![加入QQ群](https://img.shields.io/badge/已满-225920371-blue.svg)](https://jq.qq.com/?_wv=1027&k=0Ck3PvTe) [![加入QQ群](https://img.shields.io/badge/已满-201705537-blue.svg)](https://jq.qq.com/?_wv=1027&k=FnHHP4TT) [![加入QQ群](https://img.shields.io/badge/已满-236543183-blue.svg)](https://jq.qq.com/?_wv=1027&k=qdT1Ojpz) [![加入QQ群](https://img.shields.io/badge/已满-213618602-blue.svg)](https://jq.qq.com/?_wv=1027&k=nw3OiyXs) [![加入QQ群](https://img.shields.io/badge/已满-148794840-blue.svg)](https://jq.qq.com/?_wv=1027&k=kiU5WDls) [![加入QQ群](https://img.shields.io/badge/已满-118752664-blue.svg)](https://jq.qq.com/?_wv=1027&k=MtBy6YfT) [![加入QQ群](https://img.shields.io/badge/已满-101038945-blue.svg)](https://jq.qq.com/?_wv=1027&k=FqImHgH2) [![加入QQ群](https://img.shields.io/badge/已满-128355254-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=G4jZ4EtdT50PhnMBudTnEwgonxkXOscJ&authKey=FkGHYfoTKlGE6wHdKdjH9bVoOgQjtLP9WM%2Fj7pqGY1msoqw9uxDiBo39E2mLgzYg&noverify=0&group_code=128355254) [![加入QQ群](https://img.shields.io/badge/已满-179219821-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=irnwcXhbLOQEv1g-TwGifjNTA_f4wZiA&authKey=4bpzEwhcUY%2FvsPDHvzYn6xfoS%2FtOArvZ%2BGXzfr7O0%2FEqLfkKA%2BuCDXlzHIFg8t93&noverify=0&group_code=179219821) [![加入QQ群](https://img.shields.io/badge/158753145-blue.svg)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=lx1uEdEDuxeM7rUvF3qmlFdqKqdJ5Z-R&authKey=rgyPW9yhhh4IIURKVFa6NgP3qiqH04WAzrJ0trsgkr3pjzm6sKIOGyA58oOjoj%2FJ&noverify=0&group_code=158753145) 点击按钮入群。
+### 4.3 数据库连接配置
+
+在 `application-dev.yml` 中配置数据库连接信息：
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ruoyi_cloud?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: yourpassword
+```
+
+### 4.4 网关路由配置
+
+在 **ruoyi-gateway** 模块的 `application.yml` 中，为 **ruoyi-order2** 添加路由配置：
+
+```yaml
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: ruoyi-order2
+          uri: lb://ruoyi-order2
+          predicates:
+            - Path=/order2/**
+```
+
+### 4.5 运行项目
+
+1. 启动 **Nacos** 注册中心。
+2. 启动 **ruoyi-gateway** 和 **ruoyi-auth** 模块。
+3. 运行 **ruoyi-order2** 模块
+4. 确认服务在 Nacos 中已注册，访问 `/order2` 路径进行 API 测试。
+
+---
+
+## 5. 微服务功能
+
+### 5.1 订单管理接口
+
+#### 修改菜品管理
+
+**接口地址**: `/order2/dish/`  
+**请求方式**: `put`  
+**功能描述**: 修改菜品管理。
+
+**请求示例**:
+
+```json
+{
+    "createBy": null,
+    "createTime": "2023-02-16 09:50:06",
+    "updateBy": null,
+    "updateTime": "2024-09-01 21:00:29",
+    "remark": null,
+    "id": 75,
+    "name": "波士顿龙虾",
+    "categoryId": 8,
+    "price": 128,
+    "image": "http://127.0.0.1:9300/statics/2024/09/19/41e7fe06-8ae7-48e5-8858-575689f4ff2f_20240919195716A001.jpg",
+    "description": "2斤重 波斯顿龙虾",
+    "status": 1,
+    "dishFlavorList": [
+        {
+            "createBy": null,
+            "createTime": null,
+            "updateBy": null,
+            "updateTime": null,
+            "remark": null,
+            "id": 140,
+            "dishId": 75,
+            "name": "忌口",
+            "value": "[\"不要葱\",\"不要蒜\",\"不要香菜\",\"不要辣\"]",
+            "index": 1
+        },
+        {
+            "createBy": null,
+            "createTime": null,
+            "updateBy": null,
+            "updateTime": null,
+            "remark": null,
+            "id": 141,
+            "dishId": 75,
+            "name": "辣度",
+            "value": "[\"不辣\",\"微辣\",\"中辣\"]",
+            "index": 2
+        }
+    ]
+}
+```
+
+**响应示例**:
+
+```json
+{
+  "msg": "操作成功",
+  "code": 200
+}
+```
+
+#### 查询菜品详情
+
+**接口地址**: `/order2/dish/{id}`  
+**请求方式**: `GET`  
+**功能描述**: 根据订单ID查询菜品详情。
+
+**响应示例**:
+
+```json
+{
+    "msg": "操作成功",
+    "code": 200,
+    "data": {
+        "createBy": null,
+        "createTime": "2023-02-16 09:50:06",
+        "updateBy": null,
+        "updateTime": "2024-09-19 19:57:30",
+        "remark": null,
+        "id": 75,
+        "name": "波士顿龙虾",
+        "categoryId": 8,
+        "price": 128.00,
+        "image": "http://127.0.0.1:9300/statics/2024/09/19/41e7fe06-8ae7-48e5-8858-575689f4ff2f_20240919195716A001.jpg",
+        "description": "2斤重 波斯顿龙虾",
+        "status": 1,
+        "dishFlavorList": [
+            {
+                "createBy": null,
+                "createTime": null,
+                "updateBy": null,
+                "updateTime": null,
+                "remark": null,
+                "id": 140,
+                "dishId": 75,
+                "name": "忌口",
+                "value": "[\"不要葱\",\"不要蒜\",\"不要香菜\",\"不要辣\"]"
+            },
+            {
+                "createBy": null,
+                "createTime": null,
+                "updateBy": null,
+                "updateTime": null,
+                "remark": null,
+                "id": 141,
+                "dishId": 75,
+                "name": "辣度",
+                "value": "[\"不辣\",\"微辣\",\"中辣\"]"
+            }
+        ]
+    }
+}
+```
+
+---
+
+## 6. 微服务间通信
+
+### 6.1 Feign 客户端调用
+
+**ruoyi-order2** 使用 Feign 调用其他微服务（如用户服务），获取用户信息。在 `ruoyi-order2` 模块中创建 Feign 客户端接口：
+
+```java
+@FeignClient(name = "ruoyi-user")
+public interface UserFeignClient {
+
+    @GetMapping("/user/dish/{id}")
+    UserResponse getUserById(@PathVariable("id") Long userId);
+}
+```
+
+通过此接口，可以在订单模块中实现用户验证或其他跨微服务逻辑。
+
+---
+
+## 7. 前端接口
+
+### 7.1 前端配置
+
+前端部分可以通过 AJAX 或 Vue.js 前端框架与订单管理微服务交互。以下是前端请求的示例：
+
+**新增菜品及套餐分类**:
+
+```javascript
+import request from '@/utils/request'
+
+export function addCategory(data) {
+  return request({
+    url: '/order2/category',
+    method: 'post',
+    data: data
+  })
+}
+```
+
+### 7.2 Vue 页面示例
+
+```vue
+<template>
+  <div>
+        <el-button
+          type="primary"
+          plain
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+          v-hasPermi="['category:category:add']"
+        >新增</el-button>
+  </div>
+</template>
+
+<script>
+import { addCategory } from '@/api/category/category'
+
+export default {
+  methods: {
+    /** 新增按钮操作 */
+    handleAdd() {
+      this.reset();
+      this.open = true;
+      this.title = "添加菜品及套餐分类";
+    },
+    /** 提交按钮 */
+    submitForm() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+            addCategory(this.form).then(response => {
+              this.$modal.msgSuccess("新增成功");
+              this.open = false;
+              this.getList();
+            });
+          }
+        }
+    },
+  }
+}
+</script>
+```
+
+---
+
+## 8. 贡献指南
+
+欢迎参与贡献！请提交 **Pull Request**，在提交前请确保通过以下验证：
+
+1. 代码格式符合项目规范。
+2. 所有新增功能附带必要的单元测试。
+3. 修改后的代码通过 CI 验证。
+
+---
+
+## 9. License
+
+该项目基于 [MIT License](https://opensource.org/licenses/MIT) 许可。

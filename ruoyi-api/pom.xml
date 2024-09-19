@@ -10,6 +10,7 @@
 
     <modules>
         <module>ruoyi-api-system</module>
+        <module>ruoyi-api-order2</module>
     </modules>
 
     <artifactId>ruoyi-api</artifactId>
@@ -18,5 +19,6 @@
     <description>
         ruoyi-api系统接口
     </description>
+
 
 </project>
