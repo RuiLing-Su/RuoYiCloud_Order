@@ -48,7 +48,7 @@ ruoyi-cloud/
 
 ### 4.2 Nacos 配置
 
-在 **ruoyi-modules-order2** 模块的 `bootstrap.yml` 文件中，配置 Nacos 注册中心信息：
+在 **ruoyi-order2** 模块的 `bootstrap.yml` 文件中，配置 Nacos 注册中心信息：
 
 ```yaml
 spring:
@@ -62,7 +62,7 @@ spring:
 
 ### 4.3 数据库连接配置
 
-在 `application-dev.yml` 中配置数据库连接信息：
+在 `nacos配置中心` 中配置数据库连接信息：
 
 ```yaml
 spring:
