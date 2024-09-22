@@ -174,7 +174,6 @@
 </template>
 
 <script setup name="Setmeal">
-import { listCategory } from "@/api/category/category";
 import { ref } from "vue";
 import {
   listSetmeal,
@@ -182,6 +181,7 @@ import {
   delSetmeal,
   addSetmeal,
   updateSetmeal,
+  listCategory
 } from "@/api/setmeal/setmeal";
 import { useRouter } from 'vue-router';
 import { roleMenuTreeselect, treeselect as menuTreeselect } from "@/api/system/menu";

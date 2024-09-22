@@ -19,6 +19,7 @@
         <el-select
           v-model="form.categoryId"
           placeholder="请选择套餐分类"
+          style="width: 180px"
           @change="$forceUpdate()"
           clearable
         >

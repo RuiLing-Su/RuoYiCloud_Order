@@ -16,13 +16,9 @@
         />
       </el-form-item>
       <el-form-item label="售卖状态" prop="status">
-        <el-select
-          v-model="queryParams.status"
-          placeholder="请选择售卖状态"
-          clearable
-        >
+        <el-select v-model="queryParams.status" style="width: 180px;" placeholder="请选择售卖状态" clearable>
           <el-option
-            v-for="dict in dish_status"
+            v-for="dict in seal_system"
             :key="dict.value"
             :label="dict.label"
             :value="dict.value"
@@ -111,7 +107,7 @@
       </el-table-column>
       <el-table-column label="售卖状态" align="center" prop="status">
         <template #default="scope">
-          <dict-tag :options="dish_status" :value="scope.row.status" />
+          <dict-tag :options="seal_system" :value="scope.row.status" />
         </template>
       </el-table-column>
       <el-table-column
@@ -183,7 +179,7 @@
         <el-form-item label="售卖状态" prop="status">
           <el-radio-group v-model="form.status">
             <el-radio
-              v-for="dict in dish_status"
+              v-for="dict in seal_system"
               :key="dict.value"
               :label="parseInt(dict.value)"
               >{{ dict.label }}</el-radio>
@@ -277,7 +273,7 @@ import {
 import { ref } from "vue";
 
 const { proxy } = getCurrentInstance();
-const { dish_status } = proxy.useDict("dish_status");
+const { seal_system } = proxy.useDict("seal_system");
 
 const dishList = ref([]);
 const dishFlavorList = ref([]);

@@ -2,9 +2,9 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="分类类型" prop="type">
-        <el-select v-model="queryParams.type" placeholder="请选择分类类型" clearable>
+        <el-select v-model="queryParams.type" placeholder="请选择分类类型" style="width: 180px;" clearable>
           <el-option
-            v-for="dict in category_subject"
+            v-for="dict in category_type"
             :key="dict.value"
             :label="dict.label"
             :value="dict.value"
@@ -72,7 +72,7 @@
       <!-- <el-table-column label="主键" align="center" prop="id" /> -->
       <el-table-column label="分类类型" align="center" prop="type">
         <template #default="scope">
-          <dict-tag :options="category_subject" :value="scope.row.type"/>
+          <dict-tag :options="category_type" :value="scope.row.type"/>
         </template>
       </el-table-column>
       <el-table-column label="分类名称" align="center" prop="name" />
@@ -104,7 +104,7 @@
         <el-form-item label="分类类型" prop="type">
           <el-select v-model="form.type" placeholder="请选择分类类型">
             <el-option
-              v-for="dict in category_subject"
+              v-for="dict in category_type"
               :key="dict.value"
               :label="dict.label"
               :value="parseInt(dict.value)"
@@ -132,7 +132,7 @@
 import { listCategory, getCategory, delCategory, addCategory, updateCategory } from "@/api/category/category";
 
 const { proxy } = getCurrentInstance();
-const { category_subject } = proxy.useDict('category_subject');
+const { category_type } = proxy.useDict('category_type');
 
 const categoryList = ref([]);
 const open = ref(false);

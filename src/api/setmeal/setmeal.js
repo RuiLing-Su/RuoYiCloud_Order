@@ -42,3 +42,12 @@ export function delSetmeal(id) {
     method: 'delete'
   })
 }
+
+// 查询菜品及套餐分类列表
+export function listCategory(query) {
+  return request({
+    url: '/order2/category/list',
+    method: 'get',
+    params: query
+  })
+}
